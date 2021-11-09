@@ -1,0 +1,424 @@
+syntax = "proto3";
+package matrix_channel_pb;
+option go_package="./;matrix_channel_pb";
+
+// 请求 Tapd 查询用户数据的响应
+message TapdUserReply {
+  // 状态
+  int32 status = 1;
+  // 数据
+  repeated TapdUserInfo data = 2;
+  // 响应信息
+  string info = 3;
+}
+
+// Notion 变更数据
+message NotionUserChange {
+  string nickName = 1;
+  string realName = 2;
+  string pageID = 3;
+}
+
+// 请求 Tapd 查询用户参与的项目列表
+message TapdUserWorkspaceReply {
+  // 状态
+  int32 status = 1;
+  // 数据
+  repeated TapdUserWorkspaceDetail data = 2;
+  // 响应信息
+  string info = 3;
+}
+
+message TapdUserWorkspaceDetail {
+  TapdWorkspace Workspace = 1;
+}
+
+message TapdWorkspace {
+  // 项目ID
+  string id = 1;
+  // 项目名称
+  string name = 2;
+}
+
+// 请求 Tapd 查询任务数据的响应
+message TapdTaskReply {
+  // 状态
+  int32 status = 1;
+  // 数据
+  repeated TapdTaskDetail data = 2;
+  // 响应信息
+  string info = 3;
+}
+
+message TapdTaskDetail {
+  TapdTask Task = 1;
+}
+
+message TapdTask {
+  // tapdTaskID
+  string id = 1;
+  // 任务名称
+  string name = 2;
+  // 任务描述
+  string description = 3;
+  // 项目ID
+  string workspace_id = 4;
+  // 创建人
+  string creator = 5;
+  // 创建时间
+  string created = 6;
+  // 最后修改时间
+  string modified = 7;
+  // 任务状态
+  string status = 8;
+  /// 处理人
+  string owner = 9;
+  // 抄送人
+  string cc = 10;
+  // 需求 ID
+  string story_id = 11;
+  // 迭代 ID
+  string iteration_id = 12;
+  // 优先级
+  string priority = 13;
+  // 完成时间
+  string completed = 14;
+  // 工时
+  string effort = 15;
+}
+
+// 请求 Tapd 查询需求状态映射的响应
+message TapdStoryStatusMapReply {
+  // 状态
+  int32 status = 1;
+  // 数据
+  map<string,string> data = 2;
+  // 响应信息
+  string info = 3;
+}
+
+// 请求 Tapd 查询需求状态映射的空响应
+message TapdStoryStatusMapEmptyReply {
+  // 状态
+  int32 status = 1;
+  // 数据
+  repeated string data = 2;
+  // 响应信息
+  string info = 3;
+}
+
+// 请求 Tapd 查询需求数据的响应
+message TapdStoryReply {
+  // 状态
+  int32 status = 1;
+  // 数据
+  repeated TapdStoryDetail data = 2;
+  // 响应信息
+  string info = 3;
+}
+
+message TapdStoryDetail {
+  TapdStory Story = 1;
+}
+
+
+message TapdStory {
+  // tapdStoryID
+  string id = 1;
+  // 需求名称
+  string name = 2;
+  // 需求描述
+  string description = 3;
+  // 项目ID
+  string workspace_id = 4;
+  // 创建人
+  string creator = 5;
+  // 创建时间
+  string created = 6;
+  // 最后修改时间
+  string modified = 7;
+  // 需求状态
+  string status = 8;
+  /// 处理人
+  string owner = 9;
+  // 抄送人
+  string cc = 10;
+  // 迭代 ID
+  string iteration_id = 12;
+  // 优先级
+  string priority = 13;
+  // 完成时间
+  string completed = 14;
+  // 工时
+  string effort = 15;
+}
+
+
+// 请求 Tapd 查询迭代数据的响应
+message TapdIterationReply {
+  // 状态
+  int32 status = 1;
+  // 数据
+  repeated TapdIterationDetail data = 2;
+  // 响应信息
+  string info = 3;
+}
+
+message TapdIterationDetail {
+  TapdIteration Iteration = 1;
+}
+
+message TapdIteration {
+  string id = 1;
+  string name = 2;
+  string workspace_id = 3;
+  // e.g: "2021-11-19"
+  string startdate = 4;
+  // e.g: "2021-11-25"
+  string enddate = 5;
+  // open->开启/done->已关闭
+  string status = 6;
+  string description = 7;
+  // e.g: "copriwolf"
+  string creator = 8;
+  // e.g: "2021-11-03 10:40:34"
+  string created = 9;
+  // e.g: ""2021-11-03 10:40:34"
+  string modified = 10;
+}
+
+// NotionTaskChange Task变更数据
+message NotionTaskChange {
+  string changeType = 99;
+  string tapdID = 1;
+  string notionID = 2;
+  string last_modified_time = 3;
+  NotionPage notionData = 4;
+  TapdTask tapdData = 5;
+}
+
+// NotionStoryChange Story变更数据
+message NotionStoryChange {
+  string changeType = 99;
+  string storyID = 1;
+  string notionID = 2;
+  string last_modified_time = 3;
+  NotionPage notionData = 4;
+  TapdStory tapdData = 5;
+}
+
+message NotionDataBaseQueryRequest {
+  // 下一个节点
+  string start_cursor = 1;
+  // 排序方式
+  repeated NotionDataBaseQuerySort sorts = 2;
+}
+
+message NotionDataBaseQuerySort {
+  // 字段名
+  string property = 1;
+  // 排序顺序
+  string direction = 2;
+}
+
+// NotionDataBaseQueryReply 查询数据库响应
+message NotionDataBaseQueryReply {
+  string object = 1;
+  repeated  NotionPage results = 2;
+  string next_cursor = 3;
+}
+
+// NotionPage 页面属性
+message NotionPage {
+  // 类型
+  string object = 1;
+  // pageID
+  string id = 2;
+  // 创建时间
+  string created_time = 3;
+  // 最后修改时间
+  string last_edited_time = 4;
+  // 是否归档
+  bool archived = 5;
+  // pageURL
+  string url = 6;
+  // 字段
+  map<string, NotionProperty> properties = 7;
+}
+
+// NotionProperty 字段属性
+message NotionProperty {
+  // 字段 ID
+  string id = 1;
+  // 字段类型
+  string type = 2;
+  // 富文本数据(rich_text类型特有)
+  repeated NotionTypeRichText rich_text = 10;
+  // 最后修改时间(last_edited_time类型特有)
+  string last_edited_time = 11;
+  // 创建时间(created_time类型特有)
+  string created_time = 12;
+  // 多选数据（multi_select类型特有）
+  repeated NotionTypeSelect multi_select = 13;
+  // 标题数据（title类型特有）
+  repeated NotionTypeTitle title = 14;
+  // 单选数据（select类型特有）
+  NotionTypeSelect select = 15;
+  // 数字类型（number类型特有）
+  int64 number = 16;
+  // 日期类型（date类型特有）
+  NotionTypeDate date = 17;
+}
+
+
+// 日期类型（date类型特有）
+message NotionTypeDate {
+  // 开始时间
+  string start = 1;
+  // 结束时间，没有为 null
+  string end = 2;
+}
+
+// 多选数据（multi_select类型特有）
+message NotionTypeMultiSelect {
+  // id
+  string id = 1;
+  // 标签名
+  string name = 2;
+  // 颜色
+  string color = 3;
+}
+
+// 单选数据（select类型特有）
+message NotionTypeSelect {
+  // id
+  string id = 1;
+  // 名称
+  string name = 2;
+  // 颜色
+  string color = 3;
+}
+
+message NotionTypeTitle {
+  // 类型
+  string type = 1;
+  // 显示文本
+  string plain_text = 2;
+  // 超链接
+  string href = 3;
+  // 具体实现
+  NotionTypeTextInternal text = 4;
+}
+
+message NotionTypeTextInternal {
+   string content = 1;
+   string link = 2;
+}
+
+message NotionTypeUser {
+  string object = 1;
+  string id = 2;
+  string type = 3;
+  string name = 4;
+  string avatar_url = 5;
+
+  NotionTypeUserPerson person = 6;
+}
+
+message NotionTypeUserPerson {
+  string email = 1;
+}
+
+
+
+
+message NotionTypeRichText {
+  // 类型
+  string type = 1;
+  // 纯文字
+  string plain_text = 2;
+  // 跳转地址
+  string href = 3;
+  // 具体实现
+  NotionTypeTextInternal text = 4;
+}
+
+message TapdUserInfo {
+  TapdUser userWorkspace = 1;
+}
+
+message TapdUser {
+  // nickName
+  string user = 1;
+  // realName
+  string name = 2;
+  // 成员角色 id
+  repeated string role_id = 3;
+}
+
+message NotionPageCreateRequest {
+  NotionPageParent parent = 1;
+  map<string, NotionPageProperty> properties = 2;
+}
+
+message NotionPageUpdateRequest {
+  map<string, NotionPageProperty> properties = 1;
+}
+
+message NotionPageParent {
+  // db id
+  string database_id = 1;
+}
+
+message NotionPageProperty {
+    NotionTypeSelect select = 1;
+    repeated NotionTypeTitle  title = 2;
+    NotionTypeDate date = 3;
+    repeated NotionTypeRichText rich_text = 4;
+    string last_edited_time = 5;
+    string created_time = 6;
+  repeated NotionTypeSelect multi_select = 7;
+    int64 number = 8;
+    string url = 9;
+}
+
+message NotionRequestErrReply {
+  string code = 1;
+  string message = 2;
+}
+
+
+// NotionExchangeTokenRequest 请求换取 AccessToken
+message NotionExchangeTokenRequest {
+    string grant_type = 1;
+    string code = 2;
+    string redirect_uri = 3;
+}
+
+message NotionExchangeTokenReply {
+   string access_token = 1;
+   string workspace_id = 2;
+   string workspace_name = 3;
+   string workspace_icon = 4;
+   string bot_id = 5;
+   NotionExchangeOwner owner = 6;
+}
+
+message NotionExchangeOwner {
+  string type = 1;
+  NotionTypeUser user = 2;
+}
+
+message NotionExchangeErrReply {
+  string error = 1;
+}
+
+message WxNotify {
+  string msgtype = 1;
+  WxNotifyTypeMarkdown markdown = 2;
+}
+
+message WxNotifyTypeMarkdown {
+  // max 4096 字节
+  string content = 1;
+}

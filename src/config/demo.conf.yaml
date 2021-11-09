@@ -1,0 +1,58 @@
+Service:
+    # 数据同步间隔
+    refreshInterval: 10m0s
+    # 请求失败的睡眠时间
+    httpRequestFailSleepTime: 5s
+    # 最大请求失败重试次数
+    httpRequestAttempts: 5
+    # Tapd Api 用户名
+    tapdApiUser: vvvvvv
+    # Tapd Api 密码
+    tapdApiPassword: B8888888-8888-9999-0000-SSSSSSSC
+    # Tapd 公司 ID
+    tapdCompanyID: "0000700"
+
+    # Notion 机器人 ID（多人共享机器人才需要）
+    notionBotClientID: 00000-abcd-4321-abcd-0123456789
+    # Notion 机器人 密钥（多人共享机器人才需要）
+    notionBotClientSecret: secret_CCCCCCCCCCCCCCCCCCCCCC
+    # Notion 机器人 回调地址（多人共享机器人才需要）
+    notionBotRedirectUri: "https://0ne.store/"
+    # 企业微信推送通知（多人共享机器人才需要）
+    wxBotNotifyUri: "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=100-200-300-400-500-600-700"
+    # [仅 Public Bot 需要配置]  Https 服务器证书相对路径
+    tlsCertFilePath: "./config/server/0ne.store.pem"
+    # [仅 Public Bot 需要配置]  Https 服务器密钥相对路径
+    tlsKeyFilePath: "./config/server/0ne.store.key"
+
+User:
+    # 用户 A 的昵称/电邮（任意..）
+    copriwolf:
+        # 该用户启用的处理器（Enum [story]需求处理器 [task]任务处理器）
+        enable:
+            - story
+            - task
+        # 该用户在 Tapd 中的用户名
+        tapdOwner: copriwolf
+        # Notion 访问密钥（私有机器人使用 Bot Secret，多人共享机器人使用用户授权 AccessToken）
+        notionBotSecret: secret_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+        # Notion Database 任务页面的 ID
+        notionDbTaskID: 77777777777777777777777777777777
+        # Notion Database 需求页面的 ID
+        notionDbStoryID: 000000000000000000000000000000
+        # 每次强制更新
+        forceUpdate: true
+    # 用户 B
+    c_copriwolf:
+        enable:
+            - story
+        tapdOwner: c_copriwolf
+        notionBotSecret: secret_yyyyyyyyyyyyyyyyyyyyyyyyyy
+        notionDbStoryID: 666666666666666666666666666666666
+    # 用户 C
+    v_copriwolf:
+        enable:
+            - task
+        tapdOwner: v_copriwolf
+        notionBotSecret: secret_yyyyyyyyyyyyyyyyyyyyyyyyyy
+        notionDbTaskID: 77777777777777777777777777777
