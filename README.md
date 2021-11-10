@@ -1,9 +1,9 @@
-# MatrixChannel
+# 🕹 MatrixChannel
 📮  Sync Tapd To Notion. 同步 Tapd 数据至 Notion。
 
 `中文版`
 
-## 🕹 特性
+## 🥞 特性
 
 ✏️  简单配置：填充配置文件即可同步数据
 
