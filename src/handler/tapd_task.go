@@ -96,11 +96,13 @@ func (u TaskHandler) compare(notion map[string]*NotionTaskChange, tapd map[strin
 	for tapdTaskId, tapdItem := range tapd {
 		// update
 		if notionItem, ok := notion[tapdTaskId]; ok {
-			tapdTime, _ := time.ParseInLocation(constant.TimeFormatDate, tapdItem.Modified, time.Local)
-			notionTime, _ := time.ParseInLocation(time.RFC3339, notionItem.NotionData.Properties[constant.PropertyNameTapdLastModifiedTime].Date.Start, time.Local)
-			// 相差 60s 认为修改一样
-			if tapdTime.Sub(notionTime).Seconds() < 60 && !u.UserConf.ForceUpdate {
-				continue
+			if notionItem.NotionData.Properties[constant.PropertyNameTapdLastModifiedTime].Date != nil {
+				tapdTime, _ := time.ParseInLocation(constant.TimeFormatDate, tapdItem.Modified, time.Local)
+				notionTime, _ := time.ParseInLocation(time.RFC3339, notionItem.NotionData.Properties[constant.PropertyNameTapdLastModifiedTime].Date.Start, time.Local)
+				// 相差 60s 认为修改一样
+				if tapdTime.Sub(notionTime).Seconds() < 60 && !u.UserConf.ForceUpdate {
+					continue
+				}
 			}
 			updateData[tapdTaskId] = notion[tapdTaskId]
 			updateData[tapdTaskId].ChangeType = "UPDATE"

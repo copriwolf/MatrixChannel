@@ -50,6 +50,9 @@ func GetStartDate(property *NotionProperty) (result string) {
 	if util.IsZeroOfUnderlyingType(property) {
 		return
 	}
+	if util.IsZeroOfUnderlyingType(property.Date) {
+		return
+	}
 	result = property.Date.Start
 	return
 }
