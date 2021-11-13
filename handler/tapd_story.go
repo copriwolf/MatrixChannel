@@ -1,6 +1,5 @@
 package handler
 
-import "C"
 import (
 	"bytes"
 	"encoding/json"
