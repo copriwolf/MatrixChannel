@@ -14,5 +14,13 @@ COPY go.sum .
 RUN go mod download
 
 COPY ./ .
+
+
 RUN go build -o /docker-martrix-channel
+
+
+# 暴露 8443 用于公共 Bot 的 Oauth 与回调，不需要可以注释
+# Export for PublicNotinBot's Oauth And Callback, you can annotation it if you not need it.
+EXPOSE 8443
+
 CMD  [ "/docker-martrix-channel"]
