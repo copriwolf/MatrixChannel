@@ -27,12 +27,14 @@
 ## 🏄‍♂️ 快速上手
 
 1. 点击右方链接，拷贝模版到你自己的 Notion 中。 [[📍 Tapd 模版](https://www.notion.so/copriwolf/Tapd-f85af3ec57154292be411242e8a33122)]
+
     ![copyTmpl](https://user-images.githubusercontent.com/10501324/141659707-e3c49a5b-5c04-4fd2-b6e3-e35eea9859bb.png)
 
 
 2. 授权你的机器人访问与修改该页面数据。
 
-    ![Kapture 2021-11-14 at 05 39 21](https://user-images.githubusercontent.com/10501324/141659781-25da7d2c-c216-44a7-b40f-0221326474fe.gif)
+   ![Xnip2021-11-14_05-44-43](https://user-images.githubusercontent.com/10501324/141659891-df1060bf-36ac-4dbd-aeb0-57789bdb9a17.png)
+
 
 
 3. 获取页面的 PageID
