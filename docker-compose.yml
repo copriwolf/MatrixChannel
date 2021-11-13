@@ -1,0 +1,8 @@
+matrixChannel:
+  image: ghcr.io/copriwolf/matrixchannel:latest
+  ports:
+    - "8443:8443/tcp"
+  volumes:
+    - ./config/conf.yaml:/app/config/conf.yaml:ro
+    - ./config/server:/app/config/server:ro
+  restart: always

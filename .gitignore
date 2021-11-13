@@ -15,7 +15,7 @@
 # vendor/
 
 # Local file
-/config/server/
+/config/server/*.*
 /config/conf.yaml
 
 # Cache
