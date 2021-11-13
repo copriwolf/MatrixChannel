@@ -15,8 +15,8 @@
 # vendor/
 
 # Local file
-/src/config/server/
-/src/config/conf.yaml
+/config/server/
+/config/conf.yaml
 
 # Cache
 .DS_Store
