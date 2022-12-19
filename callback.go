@@ -53,12 +53,6 @@ func HttpSvr(conf *config.ServiceConfig) {
 		}
 	}()
 
-	//listen
-	//ln, err := net.Listen("tcp", srv.Addr)
-	//if err != nil {
-	//	log.Fatalf(err.Error())
-	//	return
-	//}
 	err := srv.ListenAndServeTLS(notionCallback.ServerConf.TlsCertFilePath, notionCallback.ServerConf.TlsKeyFilePath)
 	//if err != nil {
 	//	log.Fatal("ListenAndServe: ", err)
